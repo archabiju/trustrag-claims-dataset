@@ -10,4 +10,4 @@ First public release.
 - 37 questions and 109 hand-labelled claims over 12 source documents.
 - 70 claims labelled supported, 39 labelled hallucinated.
 - Labels are binary (supported or hallucinated) and were assigned by a single annotator.
-- Distributed as JSON and CSV, with the script used to generate them.
+- Distributed as JSON and CSV. The build script is included; the source corpus it needs is not.

@@ -20,7 +20,7 @@ source documents: either the source supports it, or it does not.
 | --- | --- |
 | `data/trustrag_claims_v1.json` | The dataset, grouped by question. |
 | `data/trustrag_claims_v1.csv` | The same data, one claim per row. |
-| `scripts/build_test_set.py` | The script that generated both files. |
+| `scripts/build_test_set.py` | Builds the claim set from the source corpus. The corpus is not included in this release, so the script cannot be re-run from this repository alone. |
 | `metadata.json` | Machine-readable description of the dataset. |
 
 ## Schema
@@ -49,9 +49,6 @@ annotator and no inter-annotator agreement score.
 - The set is small: 109 claims. It suits method checks, not large-scale benchmarking.
 - A single annotator means the labels reflect one person's judgement.
 - Labels are binary, with no grade for partial support.
-- The source documents are short explanatory notes, so the claims are shorter
-  and cleaner than text from real retrieved passages.
-
 ## Licence
 
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). You may share and
