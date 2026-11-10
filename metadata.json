@@ -1,0 +1,37 @@
+{
+  "name": "TrustRAG Claims",
+  "version": "1.0.0",
+  "release_date": "2026-11-10",
+  "description": "A hand-labelled, claim-level benchmark of 37 questions and 109 claims for evaluating hallucination detection in retrieval-augmented generation.",
+  "creator": {
+    "name": "Archa Biju",
+    "identifier": "CB.SC.P2CSE25001"
+  },
+  "license": "CC-BY-4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "language": "en",
+  "annotation": {
+    "annotators": 1,
+    "label_scheme": "binary",
+    "labels": ["supported", "hallucinated"]
+  },
+  "statistics": {
+    "questions": 37,
+    "claims": 109,
+    "supported_claims": 70,
+    "hallucinated_claims": 39,
+    "source_documents": 12
+  },
+  "files": [
+    "data/trustrag_claims_v1.json",
+    "data/trustrag_claims_v1.csv"
+  ],
+  "schema": {
+    "question_id": "Question identifier, Q01 to Q37.",
+    "question": "The question the claims answer.",
+    "relevant_sources": "Source document filenames that contain the supporting evidence.",
+    "claim_id": "Claim identifier within a question, for example Q01-C1.",
+    "claim_text": "A single factual claim.",
+    "hallucinated": "true if the claim is not supported by the source, false if it is."
+  }
+}

@@ -1,0 +1,110 @@
+question_id,question,relevant_sources,claim_id,claim_text,hallucinated
+Q01,What is Retrieval-Augmented Generation?,retrieval_augmented_generation.md,Q01-C1,RAG combines a retriever that searches an external knowledge source with a generator that produces text.,false
+Q01,What is Retrieval-Augmented Generation?,retrieval_augmented_generation.md,Q01-C2,A RAG system looks up relevant passages at query time and gives them to the language model as context.,false
+Q01,What is Retrieval-Augmented Generation?,retrieval_augmented_generation.md,Q01-C3,RAG completely eliminates hallucination in language models.,true
+Q01,What is Retrieval-Augmented Generation?,retrieval_augmented_generation.md,Q01-C4,RAG requires retraining the language model every time the knowledge base is updated.,true
+Q02,Why is RAG not a guarantee against hallucination?,retrieval_augmented_generation.md,Q02-C1,A language model can ignore or misread the retrieved context and still produce unsupported claims.,false
+Q02,Why is RAG not a guarantee against hallucination?,retrieval_augmented_generation.md,Q02-C2,Hallucination-detection layers check after generation whether each sentence is backed by the retrieved evidence.,false
+Q02,Why is RAG not a guarantee against hallucination?,retrieval_augmented_generation.md,Q02-C3,A model that receives retrieved context can never generate a claim unsupported by any chunk.,true
+Q03,Can RAG run offline?,retrieval_augmented_generation.md;local_llm_inference_ollama.md,Q03-C1,"RAG can run entirely offline when the embedding model, vector index and generator are all hosted locally.",false
+Q03,Can RAG run offline?,retrieval_augmented_generation.md;local_llm_inference_ollama.md,Q03-C2,Offline RAG typically uses smaller quantized open-weight models served through a runtime such as Ollama.,false
+Q03,Can RAG run offline?,retrieval_augmented_generation.md;local_llm_inference_ollama.md,Q03-C3,Offline RAG requires a cloud API for the generator model.,true
+Q04,What does the typical RAG pipeline consist of?,retrieval_augmented_generation.md,Q04-C1,"Documents are chunked, embedded and stored in a vector index, then the query is embedded and similar chunks are retrieved.",false
+Q04,What does the typical RAG pipeline consist of?,retrieval_augmented_generation.md,Q04-C2,The retrieved chunks are inserted into a prompt together with the question for the language model.,false
+Q04,What does the typical RAG pipeline consist of?,retrieval_augmented_generation.md,Q04-C3,"The typical RAG pipeline has seven stages, starting with manual annotation of every document.",true
+Q05,What is a sentence embedding?,sentence_embeddings.md,Q05-C1,A sentence embedding is a fixed-length numeric vector that represents the meaning of a piece of text.,false
+Q05,What is a sentence embedding?,sentence_embeddings.md,Q05-C2,Texts with similar meaning end up close together in the embedding vector space.,false
+Q05,What is a sentence embedding?,sentence_embeddings.md,Q05-C3,"Sentence embeddings only capture which words appear in a text, like bag-of-words.",true
+Q06,What is all-MiniLM-L6-v2?,sentence_embeddings.md,Q06-C1,all-MiniLM-L6-v2 produces 384-dimensional vectors.,false
+Q06,What is all-MiniLM-L6-v2?,sentence_embeddings.md,Q06-C2,all-MiniLM-L6-v2 is about 80 megabytes and runs comfortably on a CPU.,false
+Q06,What is all-MiniLM-L6-v2?,sentence_embeddings.md,Q06-C3,all-MiniLM-L6-v2 produces 768-dimensional vectors and needs a GPU.,true
+Q07,Why are embeddings normalized before indexing?,sentence_embeddings.md;faiss_vector_databases.md,Q07-C1,"When vectors are normalized to unit length, a dot product is equivalent to cosine similarity.",false
+Q07,Why are embeddings normalized before indexing?,sentence_embeddings.md;faiss_vector_databases.md,Q07-C2,Normalizing lets a fast dot-product search stand in for cosine similarity at no extra query-time cost.,false
+Q07,Why are embeddings normalized before indexing?,sentence_embeddings.md;faiss_vector_databases.md,Q07-C3,Normalized embeddings make the dot product equal to the Euclidean distance.,true
+Q08,How is semantic search better than keyword search?,sentence_embeddings.md,Q08-C1,Semantic search can retrieve a relevant passage even when the query and passage share almost no exact words.,false
+Q08,How is semantic search better than keyword search?,sentence_embeddings.md,Q08-C2,Keyword search is more accurate than semantic search when the query uses different vocabulary from the passage.,true
+Q09,What is FAISS?,faiss_vector_databases.md,Q09-C1,FAISS is an open-source similarity-search library developed by Meta AI.,false
+Q09,What is FAISS?,faiss_vector_databases.md,Q09-C2,FAISS runs entirely in memory on one machine with no external server or network call.,false
+Q09,What is FAISS?,faiss_vector_databases.md,Q09-C3,FAISS requires a separate database server and credentials to operate.,true
+Q09,What is FAISS?,faiss_vector_databases.md,Q09-C4,FAISS was developed by Google Research.,true
+Q10,What index types does FAISS provide?,faiss_vector_databases.md,Q10-C1,IndexFlatIP and IndexFlatL2 perform exact brute-force search over every stored vector.,false
+Q10,What index types does FAISS provide?,faiss_vector_databases.md,Q10-C2,IVF and HNSW are approximate nearest-neighbor structures that trade a little accuracy for speed.,false
+Q10,What index types does FAISS provide?,faiss_vector_databases.md,Q10-C3,IndexFlatIP is an approximate index that skips most stored vectors.,true
+Q11,Does a FAISS index update automatically when documents change?,faiss_vector_databases.md,Q11-C1,An application must explicitly re-embed and re-add or rebuild the index when the document store changes.,false
+Q11,Does a FAISS index update automatically when documents change?,faiss_vector_databases.md,Q11-C2,FAISS automatically detects deleted documents and removes their vectors in the background.,true
+Q12,What is hallucination in large language models?,hallucination_in_llms.md,Q12-C1,Hallucination is generated content that is fluent and confident-sounding but factually incorrect or unsupported.,false
+Q12,What is hallucination in large language models?,hallucination_in_llms.md,Q12-C2,"Language models are trained to predict plausible next tokens, not to verify truth.",false
+Q12,What is hallucination in large language models?,hallucination_in_llms.md,Q12-C3,Hallucinations occur only when a model is malfunctioning and produces visibly broken text.,true
+Q13,What is the difference between intrinsic and extrinsic hallucination?,hallucination_in_llms.md,Q13-C1,Intrinsic hallucinations directly contradict the source material the model was given.,false
+Q13,What is the difference between intrinsic and extrinsic hallucination?,hallucination_in_llms.md,Q13-C2,Extrinsic hallucinations introduce information that cannot be verified from the source.,false
+Q13,What is the difference between intrinsic and extrinsic hallucination?,hallucination_in_llms.md,Q13-C3,Intrinsic hallucinations are claims that are invented from the model's training data.,true
+Q14,What causes hallucination?,hallucination_in_llms.md,Q14-C1,Training data contains errors and outdated information that models can absorb as established fact.,false
+Q14,What causes hallucination?,hallucination_in_llms.md,Q14-C2,"Models can show sycophancy, generating an answer that matches what the question seems to expect.",false
+Q14,What causes hallucination?,hallucination_in_llms.md,Q14-C3,Hallucination is caused exclusively by too small a context window.,true
+Q15,How can hallucination be mitigated?,hallucination_in_llms.md,Q15-C1,Grounding the model in retrieved evidence and prompting it to say it does not know are pre-generation mitigations.,false
+Q15,How can hallucination be mitigated?,hallucination_in_llms.md,Q15-C2,Post-generation mitigation verifies each claim with entailment classifiers or similarity scores.,false
+Q15,How can hallucination be mitigated?,hallucination_in_llms.md,Q15-C3,Post-generation verification is considered a weaker safeguard than prompting alone.,true
+Q16,What is Natural Language Inference?,natural_language_inference.md,Q16-C1,NLI determines the logical relationship between a premise and a hypothesis.,false
+Q16,What is Natural Language Inference?,natural_language_inference.md,Q16-C2,"NLI classifies a hypothesis as entailment, contradiction or neutral given the premise.",false
+Q16,What is Natural Language Inference?,natural_language_inference.md,Q16-C3,NLI classifies pairs into five graded levels of similarity.,true
+Q17,How is NLI used for hallucination detection?,natural_language_inference.md,Q17-C1,The generated sentence is treated as the hypothesis and the retrieved chunk as the premise.,false
+Q17,How is NLI used for hallucination detection?,natural_language_inference.md,Q17-C2,A contradiction score means the generated sentence conflicts with the evidence.,false
+Q17,How is NLI used for hallucination detection?,natural_language_inference.md,Q17-C3,A neutral score means the sentence is fully supported by the evidence.,true
+Q18,What is a cross-encoder NLI model?,natural_language_inference.md,Q18-C1,A cross-encoder processes the premise and hypothesis together in a single forward pass.,false
+Q18,What is a cross-encoder NLI model?,natural_language_inference.md,Q18-C2,"Cross-encoders are more accurate than comparing separate sentence embeddings, but slower.",false
+Q18,What is a cross-encoder NLI model?,natural_language_inference.md,Q18-C3,Cross-encoders reuse precomputed sentence vectors so they are faster than embedding comparison.,true
+Q19,What is BERTScore?,bertscore_similarity_metrics.md,Q19-C1,BERTScore measures how similar two texts are in meaning rather than in exact wording.,false
+Q19,What is BERTScore?,bertscore_similarity_metrics.md,Q19-C2,BERTScore uses contextual token embeddings and cosine similarity between best-matching tokens.,false
+Q19,What is BERTScore?,bertscore_similarity_metrics.md,Q19-C3,BERTScore counts shared n-grams between candidate and reference text.,true
+Q20,How is BERTScore F1 computed?,bertscore_similarity_metrics.md,Q20-C1,Precision matches each candidate token to its most similar reference token and recall does the reverse.,false
+Q20,How is BERTScore F1 computed?,bertscore_similarity_metrics.md,Q20-C2,F1 is the harmonic mean of the two directional scores.,false
+Q20,How is BERTScore F1 computed?,bertscore_similarity_metrics.md,Q20-C3,F1 is the arithmetic mean of precision and recall computed from n-gram counts.,true
+Q21,Does BERTScore need training data or internet access?,bertscore_similarity_metrics.md,Q21-C1,BERTScore needs only a pretrained language model and can run offline once that model is downloaded.,false
+Q21,Does BERTScore need training data or internet access?,bertscore_similarity_metrics.md,Q21-C2,BERTScore must be fine-tuned on a labelled hallucination dataset before use.,true
+Q22,What is XAI in a retrieval system?,explainable_ai_xai.md,Q22-C1,In retrieval systems XAI explains why a chunk was retrieved and why the answer took its shape.,false
+Q22,What is XAI in a retrieval system?,explainable_ai_xai.md,Q22-C2,Chunk attribution labels which source document and page a piece of retrieved text came from.,false
+Q22,What is XAI in a retrieval system?,explainable_ai_xai.md,Q22-C3,XAI in retrieval systems is only possible by training an additional black-box classifier.,true
+Q23,What is word-level saliency?,explainable_ai_xai.md,Q23-C1,Word saliency removes a word and recomputes similarity to see how much the word contributes.,false
+Q23,What is word-level saliency?,explainable_ai_xai.md,Q23-C2,A sharp drop in similarity after removing a word means the word anchors the claim to the source.,false
+Q23,What is word-level saliency?,explainable_ai_xai.md,Q23-C3,A word whose removal sharply lowers similarity is likely filler or an unsupported addition.,true
+Q24,What is provenance scoring?,explainable_ai_xai.md,Q24-C1,Provenance scoring measures what fraction of the generated response is traceable to retrieved evidence.,false
+Q24,What is provenance scoring?,explainable_ai_xai.md,Q24-C2,Provenance scoring measures how fast the retriever returns results.,true
+Q25,What is the three-state decision scheme?,tri_state_decision_control.md,Q25-C1,A score at or above the high threshold is classified as Supported and shown with its citation.,false
+Q25,What is the three-state decision scheme?,tri_state_decision_control.md,Q25-C2,A score between the medium and high thresholds is Weakly Supported and shown with a warning.,false
+Q25,What is the three-state decision scheme?,tri_state_decision_control.md,Q25-C3,A score below the medium threshold is classified as Weakly Supported.,true
+Q26,When is an entire response blocked?,tri_state_decision_control.md,Q26-C1,"A response is blocked when more than a set fraction of its sentences, commonly fifty percent, are Hallucinated.",false
+Q26,When is an entire response blocked?,tri_state_decision_control.md,Q26-C2,When a response is blocked the system surfaces the raw retrieved evidence instead.,false
+Q26,When is an entire response blocked?,tri_state_decision_control.md,Q26-C3,A response is blocked as soon as any single sentence is classified as Hallucinated.,true
+Q27,Are the decision thresholds fixed?,tri_state_decision_control.md,Q27-C1,Both thresholds are tunable parameters depending on tolerance for false blocks versus false passes.,false
+Q27,Are the decision thresholds fixed?,tri_state_decision_control.md,Q27-C2,Raising the high threshold makes the system more conservative.,false
+Q27,Are the decision thresholds fixed?,tri_state_decision_control.md,Q27-C3,The thresholds are fixed constants that must not be changed.,true
+Q28,What is chunking and why does it matter?,chunking_strategies.md,Q28-C1,Chunking splits documents into pieces because embedding models have a maximum input length.,false
+Q28,What is chunking and why does it matter?,chunking_strategies.md,Q28-C2,Chunks that are too small lose context needed to interpret a sentence.,false
+Q28,What is chunking and why does it matter?,chunking_strategies.md,Q28-C3,Chunk size has no measurable effect on retrieval quality.,true
+Q29,What is a common chunking configuration?,chunking_strategies.md,Q29-C1,A common configuration is 512 tokens per chunk with a 50-token overlap.,false
+Q29,What is a common chunking configuration?,chunking_strategies.md,Q29-C2,Overlap ensures content near a cut point appears in full in at least one chunk.,false
+Q29,What is a common chunking configuration?,chunking_strategies.md,Q29-C3,The common configuration uses 128 tokens per chunk with no overlap.,true
+Q30,What alternatives to fixed-size chunking exist?,chunking_strategies.md,Q30-C1,Semantic chunking uses embedding similarity between adjacent sentences to find topic boundaries.,false
+Q30,What alternatives to fixed-size chunking exist?,chunking_strategies.md,Q30-C2,"Recursive chunking splits by sections, then paragraphs, then sentences before falling back to fixed size.",false
+Q30,What alternatives to fixed-size chunking exist?,chunking_strategies.md,Q30-C3,Sentence-based chunking produces chunks of exactly equal size.,true
+Q31,What do precision and recall measure for hallucination detection?,evaluation_metrics.md,Q31-C1,Precision is the fraction of flagged claims that were actually hallucinated.,false
+Q31,What do precision and recall measure for hallucination detection?,evaluation_metrics.md,Q31-C2,Recall is the fraction of actual hallucinations that the system caught.,false
+Q31,What do precision and recall measure for hallucination detection?,evaluation_metrics.md,Q31-C3,Precision is the fraction of all hallucinated claims that the system caught.,true
+Q32,What does AUROC measure?,evaluation_metrics.md,Q32-C1,AUROC evaluates a system across every possible decision threshold at once.,false
+Q32,What does AUROC measure?,evaluation_metrics.md,Q32-C2,An AUROC of 0.5 means the score is no better than a random guess.,false
+Q32,What does AUROC measure?,evaluation_metrics.md,Q32-C3,An AUROC of 0.5 means the two classes are perfectly separable.,true
+Q33,Which error is more costly in hallucination detection?,evaluation_metrics.md,Q33-C1,A missed hallucination is generally more costly than an unnecessarily flagged correct claim.,false
+Q33,Which error is more costly in hallucination detection?,evaluation_metrics.md,Q33-C2,Reporting only accuracy on an imbalanced test set can be misleading.,false
+Q33,Which error is more costly in hallucination detection?,evaluation_metrics.md,Q33-C3,False positives are generally considered more costly than false negatives.,true
+Q34,What is Ollama?,local_llm_inference_ollama.md,Q34-C1,"Ollama exposes a local HTTP API, by default at http://localhost:11434.",false
+Q34,What is Ollama?,local_llm_inference_ollama.md,Q34-C2,Ollama handles quantization so open-weight models use less memory.,false
+Q34,What is Ollama?,local_llm_inference_ollama.md,Q34-C3,Ollama sends prompts to a hosted cloud service for inference.,true
+Q35,What are the trade-offs of local inference?,local_llm_inference_ollama.md,Q35-C1,"No data leaves the machine, so local inference suits privacy-sensitive environments.",false
+Q35,What are the trade-offs of local inference?,local_llm_inference_ollama.md,Q35-C2,Local open-weight models are typically smaller and slower than the largest proprietary models.,false
+Q35,What are the trade-offs of local inference?,local_llm_inference_ollama.md,Q35-C3,Local inference incurs a per-token cost and an external rate limit.,true
+Q36,Why is prompt engineering not enough to prevent hallucination?,prompt_engineering.md;local_llm_inference_ollama.md,Q36-C1,A language model has no mechanism that enforces a grounding instruction the way software enforces a rule.,false
+Q36,Why is prompt engineering not enough to prevent hallucination?,prompt_engineering.md;local_llm_inference_ollama.md,Q36-C2,Prompt engineering is a first line of defense while independent verification catches what the prompt failed to prevent.,false
+Q36,Why is prompt engineering not enough to prevent hallucination?,prompt_engineering.md;local_llm_inference_ollama.md,Q36-C3,A well-written grounding prompt guarantees the model never uses unretrieved facts.,true
+Q37,How can prompts reduce hallucination?,prompt_engineering.md,Q37-C1,Labelling each retrieved passage with its source and page helps the model cite correctly.,false
+Q37,How can prompts reduce hallucination?,prompt_engineering.md,Q37-C2,Lowering the generation temperature reduces the tendency to embellish.,false
+Q37,How can prompts reduce hallucination?,prompt_engineering.md,Q37-C3,Raising the temperature makes the model stick more closely to the provided context.,true
